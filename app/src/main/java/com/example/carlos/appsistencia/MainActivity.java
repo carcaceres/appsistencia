@@ -16,16 +16,19 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
-    private EditText urltextView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String url;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mWebView = (WebView) findViewById(R.id.webView);
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        // Provide a WebViewClient for your WebView
+        mWebView.setWebViewClient(new WebViewClient());
 
+        mWebView.loadUrl("http://192.168.1.57/validar/index.html");
 
 
 
@@ -59,18 +62,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void mostrarWeb(View v){
-        String url;
-        urltextView=(EditText) findViewById(R.id.urlText);
-        url="http://"+urltextView.getText()+"/validar/index.html";
-        mWebView = (WebView) findViewById(R.id.webView);
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        // Provide a WebViewClient for your WebView
-        mWebView.setWebViewClient(new WebViewClient());
-        mWebView.loadUrl(url);
     }
 }
